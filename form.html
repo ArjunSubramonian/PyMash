@@ -29,6 +29,10 @@
         }
     </script>
 
+    <script id = "getMash">
+
+    </script>
+
     <container>
         <body>
             <h1>Welcome to PyMash</h1>
@@ -42,9 +46,14 @@
             <div name="songs" id="songs" > 
 
             </div>
+
+            <button id = "mash" onclick = "getMash()" class="Disabled"> </button>
         </body>
     </container>
 
+    
+
+    
     <style>
         body 
         {
@@ -85,6 +94,15 @@
             box-shadow: 0 2px 10px rgba(0,0,0,.2);
             border: 2px solid #d91e18;
             color: #d91e18;
+          }
+
+          .Disabled {
+            pointer-events: none;
+            cursor: not-allowed;
+            opacity: 0.65;
+            filter: alpha(opacity=65);
+            -webkit-box-shadow: none;
+            box-shadow: none;
           }
           
           &:active {
