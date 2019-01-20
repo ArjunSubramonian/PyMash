@@ -108,7 +108,7 @@ def find_best_overlay(path_song1, path_song2, dir):
 
 # sr1 should equal sr2
 if __name__ == "__main__":
-    norm = True
+    norm = False
     if norm:
         for file in os.listdir(test_folder_path + "/"):
             if (file.endswith(".wav")):
@@ -124,5 +124,6 @@ if __name__ == "__main__":
                 print('Currently PyMashing: ' + i + ' and ' + j)
 
                 permutations[i.split('/')[-1] + '|' + j.split('/')[-1]] = find_best_overlay(i, j, test_folder_path)
-
-    print(permutations)
+                
+    with open('permutations/quality.txt', 'w') as f:
+        f.write(permutations)
