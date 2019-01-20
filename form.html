@@ -7,8 +7,10 @@
     </head>
 
     <script id = "playlists">
+        var fs = require('fs');
+        var files = fs.readdirSync('/testSongs/70s/');
         var songsByPlaylist = {
-            A: ["Song0", "Song1", "Song2", "Song3", "Song4", "Song5", "Song6"],
+            A: files,
             B: ["Bong0", "Bong1", "Bong2", "Bong3", "Bong4", "Bong5", "Bong6"]
         }
 
