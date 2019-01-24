@@ -9,6 +9,7 @@ import thinkstats2
 import numpy as np
 import pandas as pd
 import os
+import json
 
 import warnings
 warnings.filterwarnings("ignore")
@@ -16,7 +17,7 @@ warnings.filterwarnings("ignore")
 #globals
 harmonics = [1,1/2,1/3,1/4]
 precision = 0.01
-test_folder_path = "permutations"
+test_folder_path = "examples"
 
 def assess_quality(path_to_wav_file):
     f = thinkdsp.read_wave(path_to_wav_file)
@@ -108,13 +109,13 @@ def find_best_overlay(path_song1, path_song2, dir):
 
 # sr1 should equal sr2
 if __name__ == "__main__":
-    norm = False
+    norm = True
     if norm:
         for file in os.listdir(test_folder_path + "/"):
             if (file.endswith(".wav")):
-                sound = AudioSegment.from_file(test_folder_path + "/" + file, "mp3")
+                sound = AudioSegment.from_file(test_folder_path + "/" + file, "wav")
                 normalized_sound = match_target_amplitude(sound, -20.0)
-                normalized_sound.export(test_folder_path + "/" + file, format="mp3")
+                normalized_sound.export(test_folder_path + "/" + file, format="wav")
 
     playlist = folderToArray(test_folder_path)
     permutations = {}
@@ -125,5 +126,5 @@ if __name__ == "__main__":
 
                 permutations[i.split('/')[-1] + '|' + j.split('/')[-1]] = find_best_overlay(i, j, test_folder_path)
                 
-    with open('permutations/quality.txt', 'w') as f:
-        f.write(permutations)
+    with open(test_folder_path + '/quality.txt', 'w') as f:
+        f.write(json.dumps(permutations))
