@@ -8,6 +8,7 @@ import thinkstats2
 
 import numpy as np
 import pandas as pd
+import soundfile as sf
 import os
 
 import warnings
@@ -64,10 +65,16 @@ def match_target_amplitude(sound, target_dBFS):
 def stretch(path_to_wav_file,new_file_path,old_tempo, new_tempo):
     y, sr = librosa.load(path_to_wav_file)
     stretch = new_tempo/old_tempo
+    # making sure the song isn't slowed down too much
+    ### librosa estimates tempo based on pulses, so a song with
+    ### only downbeats would result in a much smaller tempo
+    if (stretch < 1/2):
+        stretch = stretch * 2
+    if (stretch > 2):
+        stretch = stretch/2
     y_new = librosa.effects.time_stretch(y, stretch)
     #restoring pitch
     y_new = librosa.effects.pitch_shift(y_new, sr, n_steps=1/stretch)
-
     librosa.output.write_wav(new_file_path, y_new, sr, False)
 
 #start2 is in time
@@ -118,12 +125,19 @@ if __name__ == "__main__":
 
     playlist = folderToArray(test_folder_path)
     permutations = {}
-    for i in playlist:
-        for j in playlist:
-            if (i != j):
-                print('Currently PyMashing: ' + i + ' and ' + j)
+#    for i in playlist:
+#        for j in playlist:
+#            if (i != j):
+#                print('Currently PyMashing: ' + i + ' and ' + j)
+#
+#                permutations[i.split('/')[-1] + '|' + j.split('/')[-1]] = find_best_overlay(i, j, test_folder_path)
 
-                permutations[i.split('/')[-1] + '|' + j.split('/')[-1]] = find_best_overlay(i, j, test_folder_path)
-                
+    for file in playlist:
+        if (file.endswith(".wav")):
+            data, samplerate = sf.read(file)
+            sf.write(file, data, samplerate, subtype='PCM_16')
+            print("assessing " + file)
+            permutations[file] = assess_quality(file)
+
     with open('permutations/quality.txt', 'w') as f:
-        f.write(permutations)
+        f.write(str(permutations))
