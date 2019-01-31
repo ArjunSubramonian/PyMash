@@ -140,12 +140,9 @@ if __name__ == "__main__":
             print("assessing " + file)
             permutations[file] = assess_quality(file)
 
-<<<<<<< HEAD:quality.py
     with open('permutations/quality.txt', 'w') as f:
         f.write(str(permutations))
-=======
                 permutations[i.split('/')[-1] + '|' + j.split('/')[-1]] = find_best_overlay(i, j, test_folder_path)
                 
     with open(test_folder_path + '/quality.txt', 'w') as f:
         f.write(json.dumps(permutations))
->>>>>>> 4405ac19a18f9ae8361c609e04bbc76300db9a95:run_pymash.py
