@@ -1,5 +1,9 @@
 """This file contains code for use with "Think Stats" and
 "Think Bayes", both by Allen B. Downey, available from greenteapress.com
+<<<<<<< HEAD
+=======
+
+>>>>>>> 4405ac19a18f9ae8361c609e04bbc76300db9a95
 Copyright 2014 Allen B. Downey
 License: GNU GPLv3 http://www.gnu.org/licenses/gpl.html
 """
@@ -7,11 +11,25 @@ License: GNU GPLv3 http://www.gnu.org/licenses/gpl.html
 from __future__ import print_function, division
 
 """This file contains class definitions for:
+<<<<<<< HEAD
 Hist: represents a histogram (map from values to integer frequencies).
 Pmf: represents a probability mass function (map from values to probs).
 _DictWrapper: private parent class for Hist and Pmf.
 Cdf: represents a discrete cumulative distribution function
 Pdf: represents a continuous probability density function
+=======
+
+Hist: represents a histogram (map from values to integer frequencies).
+
+Pmf: represents a probability mass function (map from values to probs).
+
+_DictWrapper: private parent class for Hist and Pmf.
+
+Cdf: represents a discrete cumulative distribution function
+
+Pdf: represents a continuous probability density function
+
+>>>>>>> 4405ac19a18f9ae8361c609e04bbc76300db9a95
 """
 
 import bisect
@@ -42,6 +60,10 @@ ROOT2 = math.sqrt(2)
 
 def RandomSeed(x):
     """Initialize the random and np.random generators.
+<<<<<<< HEAD
+=======
+
+>>>>>>> 4405ac19a18f9ae8361c609e04bbc76300db9a95
     x: int seed
     """
     random.seed(x)
@@ -50,11 +72,23 @@ def RandomSeed(x):
 
 def Odds(p):
     """Computes odds for a given probability.
+<<<<<<< HEAD
     Example: p=0.75 means 75 for and 25 against, or 3:1 odds in favor.
     Note: when p=1, the formula for odds divides by zero, which is
     normally undefined.  But I think it is reasonable to define Odds(1)
     to be infinity, so that's what this function does.
     p: float 0-1
+=======
+
+    Example: p=0.75 means 75 for and 25 against, or 3:1 odds in favor.
+
+    Note: when p=1, the formula for odds divides by zero, which is
+    normally undefined.  But I think it is reasonable to define Odds(1)
+    to be infinity, so that's what this function does.
+
+    p: float 0-1
+
+>>>>>>> 4405ac19a18f9ae8361c609e04bbc76300db9a95
     Returns: float odds
     """
     if p == 1:
@@ -64,8 +98,16 @@ def Odds(p):
 
 def Probability(o):
     """Computes the probability corresponding to given odds.
+<<<<<<< HEAD
     Example: o=2 means 2:1 odds in favor, or 2/3 probability
     o: float odds, strictly positive
+=======
+
+    Example: o=2 means 2:1 odds in favor, or 2/3 probability
+
+    o: float odds, strictly positive
+
+>>>>>>> 4405ac19a18f9ae8361c609e04bbc76300db9a95
     Returns: float probability
     """
     return o / (o + 1)
@@ -73,6 +115,10 @@ def Probability(o):
 
 def Probability2(yes, no):
     """Computes the probability corresponding to given odds.
+<<<<<<< HEAD
+=======
+
+>>>>>>> 4405ac19a18f9ae8361c609e04bbc76300db9a95
     Example: yes=2, no=1 means 2:1 odds in favor, or 2/3 probability.
     
     yes, no: int or float odds in favor
@@ -82,6 +128,10 @@ def Probability2(yes, no):
 
 class Interpolator(object):
     """Represents a mapping between sorted sequences; performs linear interp.
+<<<<<<< HEAD
+=======
+
+>>>>>>> 4405ac19a18f9ae8361c609e04bbc76300db9a95
     Attributes:
         xs: sorted list
         ys: sorted list
@@ -121,6 +171,10 @@ class _DictWrapper(object):
 
     def __init__(self, obj=None, label=None):
         """Initializes the distribution.
+<<<<<<< HEAD
+=======
+
+>>>>>>> 4405ac19a18f9ae8361c609e04bbc76300db9a95
         obj: Hist, Pmf, Cdf, Pdf, dict, pandas Series, list of pairs
         label: string label
         """
@@ -196,9 +250,18 @@ class _DictWrapper(object):
 
     def Copy(self, label=None):
         """Returns a copy.
+<<<<<<< HEAD
         Make a shallow copy of d.  If you want a deep copy of d,
         use copy.deepcopy on the whole object.
         label: string label for the new Hist
+=======
+
+        Make a shallow copy of d.  If you want a deep copy of d,
+        use copy.deepcopy on the whole object.
+
+        label: string label for the new Hist
+
+>>>>>>> 4405ac19a18f9ae8361c609e04bbc76300db9a95
         returns: new _DictWrapper with the same type
         """
         new = copy.copy(self)
@@ -208,7 +271,13 @@ class _DictWrapper(object):
 
     def Scale(self, factor):
         """Multiplies the values by a factor.
+<<<<<<< HEAD
         factor: what to multiply by
+=======
+
+        factor: what to multiply by
+
+>>>>>>> 4405ac19a18f9ae8361c609e04bbc76300db9a95
         Returns: new object
         """
         new = self.Copy()
@@ -222,6 +291,10 @@ class _DictWrapper(object):
         """Log transforms the probabilities.
         
         Removes values with probability 0.
+<<<<<<< HEAD
+=======
+
+>>>>>>> 4405ac19a18f9ae8361c609e04bbc76300db9a95
         Normalizes so that the largest logprob is 0.
         """
         if self.log:
@@ -239,7 +312,13 @@ class _DictWrapper(object):
 
     def Exp(self, m=None):
         """Exponentiates the probabilities.
+<<<<<<< HEAD
         m: how much to shift the ps before exponentiating
+=======
+
+        m: how much to shift the ps before exponentiating
+
+>>>>>>> 4405ac19a18f9ae8361c609e04bbc76300db9a95
         If m is None, normalizes so that the largest prob is 1.
         """
         if not self.log:
@@ -262,6 +341,10 @@ class _DictWrapper(object):
 
     def Values(self):
         """Gets an unsorted sequence of values.
+<<<<<<< HEAD
+=======
+
+>>>>>>> 4405ac19a18f9ae8361c609e04bbc76300db9a95
         Note: one source of confusion is that the keys of this
         dictionary are the values of the Hist/Pmf, and the
         values of the dictionary are frequencies/probabilities.
@@ -274,6 +357,10 @@ class _DictWrapper(object):
 
     def SortedItems(self):
         """Gets a sorted sequence of (value, freq/prob) pairs.
+<<<<<<< HEAD
+=======
+
+>>>>>>> 4405ac19a18f9ae8361c609e04bbc76300db9a95
         It items are unsortable, the result is unsorted.
         """
         def isnan(x):
@@ -293,7 +380,13 @@ class _DictWrapper(object):
 
     def Render(self, **options):
         """Generates a sequence of points suitable for plotting.
+<<<<<<< HEAD
         Note: options are ignored
+=======
+
+        Note: options are ignored
+
+>>>>>>> 4405ac19a18f9ae8361c609e04bbc76300db9a95
         Returns:
             tuple of (sorted value sequence, freq/prob sequence)
         """
@@ -311,6 +404,10 @@ class _DictWrapper(object):
 
     def Set(self, x, y=0):
         """Sets the freq/prob associated with the value x.
+<<<<<<< HEAD
+=======
+
+>>>>>>> 4405ac19a18f9ae8361c609e04bbc76300db9a95
         Args:
             x: number value
             y: number freq or prob
@@ -319,6 +416,10 @@ class _DictWrapper(object):
 
     def Incr(self, x, term=1):
         """Increments the freq/prob associated with the value x.
+<<<<<<< HEAD
+=======
+
+>>>>>>> 4405ac19a18f9ae8361c609e04bbc76300db9a95
         Args:
             x: number value
             term: how much to increment by
@@ -327,6 +428,10 @@ class _DictWrapper(object):
 
     def Mult(self, x, factor):
         """Scales the freq/prob associated with the value x.
+<<<<<<< HEAD
+=======
+
+>>>>>>> 4405ac19a18f9ae8361c609e04bbc76300db9a95
         Args:
             x: number value
             factor: how much to multiply by
@@ -335,7 +440,13 @@ class _DictWrapper(object):
 
     def Remove(self, x):
         """Removes a value.
+<<<<<<< HEAD
         Throws an exception if the value is not there.
+=======
+
+        Throws an exception if the value is not there.
+
+>>>>>>> 4405ac19a18f9ae8361c609e04bbc76300db9a95
         Args:
             x: value to remove
         """
@@ -352,12 +463,20 @@ class _DictWrapper(object):
 
     def Largest(self, n=10):
         """Returns the largest n values, with frequency/probability.
+<<<<<<< HEAD
+=======
+
+>>>>>>> 4405ac19a18f9ae8361c609e04bbc76300db9a95
         n: number of items to return
         """
         return sorted(self.d.items(), reverse=True)[:n]
 
     def Smallest(self, n=10):
         """Returns the smallest n values, with frequency/probability.
+<<<<<<< HEAD
+=======
+
+>>>>>>> 4405ac19a18f9ae8361c609e04bbc76300db9a95
         n: number of items to return
         """
         return sorted(self.d.items(), reverse=False)[:n]
@@ -365,12 +484,23 @@ class _DictWrapper(object):
 
 class Hist(_DictWrapper):
     """Represents a histogram, which is a map from values to frequencies.
+<<<<<<< HEAD
+=======
+
+>>>>>>> 4405ac19a18f9ae8361c609e04bbc76300db9a95
     Values can be any hashable type; frequencies are integer counters.
     """
     def Freq(self, x):
         """Gets the frequency associated with the value x.
+<<<<<<< HEAD
         Args:
             x: number value
+=======
+
+        Args:
+            x: number value
+
+>>>>>>> 4405ac19a18f9ae8361c609e04bbc76300db9a95
         Returns:
             int frequency
         """
@@ -403,9 +533,17 @@ class Pmf(_DictWrapper):
 
     def Prob(self, x, default=0):
         """Gets the probability associated with the value x.
+<<<<<<< HEAD
         Args:
             x: number value
             default: value to return if the key is not there
+=======
+
+        Args:
+            x: number value
+            default: value to return if the key is not there
+
+>>>>>>> 4405ac19a18f9ae8361c609e04bbc76300db9a95
         Returns:
             float probability
         """
@@ -417,9 +555,18 @@ class Pmf(_DictWrapper):
 
     def Percentile(self, percentage):
         """Computes a percentile of a given Pmf.
+<<<<<<< HEAD
         Note: this is not super efficient.  If you are planning
         to compute more than a few percentiles, compute the Cdf.
         percentage: float 0-100
+=======
+
+        Note: this is not super efficient.  If you are planning
+        to compute more than a few percentiles, compute the Cdf.
+
+        percentage: float 0-100
+
+>>>>>>> 4405ac19a18f9ae8361c609e04bbc76300db9a95
         returns: value from the Pmf
         """
         p = percentage / 100
@@ -431,7 +578,13 @@ class Pmf(_DictWrapper):
 
     def ProbGreater(self, x):
         """Probability that a sample from this Pmf exceeds x.
+<<<<<<< HEAD
         x: number
+=======
+
+        x: number
+
+>>>>>>> 4405ac19a18f9ae8361c609e04bbc76300db9a95
         returns: float probability
         """
         if isinstance(x, _DictWrapper):
@@ -442,7 +595,13 @@ class Pmf(_DictWrapper):
 
     def ProbLess(self, x):
         """Probability that a sample from this Pmf is less than x.
+<<<<<<< HEAD
         x: number
+=======
+
+        x: number
+
+>>>>>>> 4405ac19a18f9ae8361c609e04bbc76300db9a95
         returns: float probability
         """
         if isinstance(x, _DictWrapper):
@@ -453,7 +612,13 @@ class Pmf(_DictWrapper):
 
     def ProbEqual(self, x):
         """Probability that a sample from this Pmf is exactly x.
+<<<<<<< HEAD
         x: number
+=======
+
+        x: number
+
+>>>>>>> 4405ac19a18f9ae8361c609e04bbc76300db9a95
         returns: float probability
         """
         if isinstance(x, _DictWrapper):
@@ -467,8 +632,15 @@ class Pmf(_DictWrapper):
 
     def Normalize(self, fraction=1):
         """Normalizes this PMF so the sum of all probs is fraction.
+<<<<<<< HEAD
         Args:
             fraction: what the total should be after normalization
+=======
+
+        Args:
+            fraction: what the total should be after normalization
+
+>>>>>>> 4405ac19a18f9ae8361c609e04bbc76300db9a95
         Returns: the total probability before normalizing
         """
         if self.log:
@@ -486,8 +658,15 @@ class Pmf(_DictWrapper):
 
     def Random(self):
         """Chooses a random element from this PMF.
+<<<<<<< HEAD
         Note: this is not very efficient.  If you plan to call
         this more than a few times, consider converting to a CDF.
+=======
+
+        Note: this is not very efficient.  If you plan to call
+        this more than a few times, consider converting to a CDF.
+
+>>>>>>> 4405ac19a18f9ae8361c609e04bbc76300db9a95
         Returns:
             float value from the Pmf
         """
@@ -511,6 +690,10 @@ class Pmf(_DictWrapper):
 
     def Mean(self):
         """Computes the mean of a PMF.
+<<<<<<< HEAD
+=======
+
+>>>>>>> 4405ac19a18f9ae8361c609e04bbc76300db9a95
         Returns:
             float mean
         """
@@ -518,6 +701,10 @@ class Pmf(_DictWrapper):
 
     def Median(self):
         """Computes the median of a PMF.
+<<<<<<< HEAD
+=======
+
+>>>>>>> 4405ac19a18f9ae8361c609e04bbc76300db9a95
         Returns:
             float median
         """
@@ -525,8 +712,15 @@ class Pmf(_DictWrapper):
 
     def Var(self, mu=None):
         """Computes the variance of a PMF.
+<<<<<<< HEAD
         mu: the point around which the variance is computed;
                 if omitted, computes the mean
+=======
+
+        mu: the point around which the variance is computed;
+                if omitted, computes the mean
+
+>>>>>>> 4405ac19a18f9ae8361c609e04bbc76300db9a95
         returns: float variance
         """
         if mu is None:
@@ -536,6 +730,10 @@ class Pmf(_DictWrapper):
 
     def Expect(self, func):
         """Computes the expectation of func(x).
+<<<<<<< HEAD
+=======
+
+>>>>>>> 4405ac19a18f9ae8361c609e04bbc76300db9a95
         Returns:
             expectation
         """
@@ -543,8 +741,15 @@ class Pmf(_DictWrapper):
 
     def Std(self, mu=None):
         """Computes the standard deviation of a PMF.
+<<<<<<< HEAD
         mu: the point around which the variance is computed;
                 if omitted, computes the mean
+=======
+
+        mu: the point around which the variance is computed;
+                if omitted, computes the mean
+
+>>>>>>> 4405ac19a18f9ae8361c609e04bbc76300db9a95
         returns: float standard deviation
         """
         var = self.Var(mu)
@@ -552,6 +757,10 @@ class Pmf(_DictWrapper):
 
     def Mode(self):
         """Returns the value with the highest probability.
+<<<<<<< HEAD
+=======
+
+>>>>>>> 4405ac19a18f9ae8361c609e04bbc76300db9a95
         Returns: float probability
         """
         _, val = max((prob, val) for val, prob in self.Items())
@@ -566,9 +775,18 @@ class Pmf(_DictWrapper):
 
     def CredibleInterval(self, percentage=90):
         """Computes the central credible interval.
+<<<<<<< HEAD
         If percentage=90, computes the 90% CI.
         Args:
             percentage: float between 0 and 100
+=======
+
+        If percentage=90, computes the 90% CI.
+
+        Args:
+            percentage: float between 0 and 100
+
+>>>>>>> 4405ac19a18f9ae8361c609e04bbc76300db9a95
         Returns:
             sequence of two floats, low and high
         """
@@ -577,7 +795,13 @@ class Pmf(_DictWrapper):
 
     def __add__(self, other):
         """Computes the Pmf of the sum of values drawn from self and other.
+<<<<<<< HEAD
         other: another Pmf or a scalar
+=======
+
+        other: another Pmf or a scalar
+
+>>>>>>> 4405ac19a18f9ae8361c609e04bbc76300db9a95
         returns: new Pmf
         """
         try:
@@ -589,7 +813,13 @@ class Pmf(_DictWrapper):
 
     def AddPmf(self, other):
         """Computes the Pmf of the sum of values drawn from self and other.
+<<<<<<< HEAD
         other: another Pmf
+=======
+
+        other: another Pmf
+
+>>>>>>> 4405ac19a18f9ae8361c609e04bbc76300db9a95
         returns: new Pmf
         """
         pmf = Pmf()
@@ -600,7 +830,13 @@ class Pmf(_DictWrapper):
 
     def AddConstant(self, other):
         """Computes the Pmf of the sum a constant and values from self.
+<<<<<<< HEAD
         other: a number
+=======
+
+        other: a number
+
+>>>>>>> 4405ac19a18f9ae8361c609e04bbc76300db9a95
         returns: new Pmf
         """
         if other == 0:
@@ -613,7 +849,13 @@ class Pmf(_DictWrapper):
 
     def __sub__(self, other):
         """Computes the Pmf of the diff of values drawn from self and other.
+<<<<<<< HEAD
         other: another Pmf
+=======
+
+        other: another Pmf
+
+>>>>>>> 4405ac19a18f9ae8361c609e04bbc76300db9a95
         returns: new Pmf
         """
         try:
@@ -623,7 +865,13 @@ class Pmf(_DictWrapper):
 
     def SubPmf(self, other):
         """Computes the Pmf of the diff of values drawn from self and other.
+<<<<<<< HEAD
         other: another Pmf
+=======
+
+        other: another Pmf
+
+>>>>>>> 4405ac19a18f9ae8361c609e04bbc76300db9a95
         returns: new Pmf
         """
         pmf = Pmf()
@@ -634,7 +882,13 @@ class Pmf(_DictWrapper):
 
     def __mul__(self, other):
         """Computes the Pmf of the product of values drawn from self and other.
+<<<<<<< HEAD
         other: another Pmf
+=======
+
+        other: another Pmf
+
+>>>>>>> 4405ac19a18f9ae8361c609e04bbc76300db9a95
         returns: new Pmf
         """
         try:
@@ -644,7 +898,13 @@ class Pmf(_DictWrapper):
 
     def MulPmf(self, other):
         """Computes the Pmf of the diff of values drawn from self and other.
+<<<<<<< HEAD
         other: another Pmf
+=======
+
+        other: another Pmf
+
+>>>>>>> 4405ac19a18f9ae8361c609e04bbc76300db9a95
         returns: new Pmf
         """
         pmf = Pmf()
@@ -655,7 +915,13 @@ class Pmf(_DictWrapper):
 
     def MulConstant(self, other):
         """Computes the Pmf of the product of a constant and values from self.
+<<<<<<< HEAD
         other: a number
+=======
+
+        other: a number
+
+>>>>>>> 4405ac19a18f9ae8361c609e04bbc76300db9a95
         returns: new Pmf
         """
         pmf = Pmf()
@@ -665,7 +931,13 @@ class Pmf(_DictWrapper):
 
     def __div__(self, other):
         """Computes the Pmf of the ratio of values drawn from self and other.
+<<<<<<< HEAD
         other: another Pmf
+=======
+
+        other: another Pmf
+
+>>>>>>> 4405ac19a18f9ae8361c609e04bbc76300db9a95
         returns: new Pmf
         """
         try:
@@ -677,7 +949,13 @@ class Pmf(_DictWrapper):
 
     def DivPmf(self, other):
         """Computes the Pmf of the ratio of values drawn from self and other.
+<<<<<<< HEAD
         other: another Pmf
+=======
+
+        other: another Pmf
+
+>>>>>>> 4405ac19a18f9ae8361c609e04bbc76300db9a95
         returns: new Pmf
         """
         pmf = Pmf()
@@ -688,7 +966,13 @@ class Pmf(_DictWrapper):
 
     def Max(self, k):
         """Computes the CDF of the maximum of k selections from this dist.
+<<<<<<< HEAD
         k: int
+=======
+
+        k: int
+
+>>>>>>> 4405ac19a18f9ae8361c609e04bbc76300db9a95
         returns: new Cdf
         """
         cdf = self.MakeCdf()
@@ -698,12 +982,22 @@ class Pmf(_DictWrapper):
 
 class Joint(Pmf):
     """Represents a joint distribution.
+<<<<<<< HEAD
+=======
+
+>>>>>>> 4405ac19a18f9ae8361c609e04bbc76300db9a95
     The values are sequences (usually tuples)
     """
 
     def Marginal(self, i, label=None):
         """Gets the marginal distribution of the indicated variable.
+<<<<<<< HEAD
         i: index of the variable we want
+=======
+
+        i: index of the variable we want
+
+>>>>>>> 4405ac19a18f9ae8361c609e04bbc76300db9a95
         Returns: Pmf
         """
         pmf = Pmf(label=label)
@@ -713,10 +1007,20 @@ class Joint(Pmf):
 
     def Conditional(self, i, j, val, label=None):
         """Gets the conditional distribution of the indicated variable.
+<<<<<<< HEAD
         Distribution of vs[i], conditioned on vs[j] = val.
         i: index of the variable we want
         j: which variable is conditioned on
         val: the value the jth variable has to have
+=======
+
+        Distribution of vs[i], conditioned on vs[j] = val.
+
+        i: index of the variable we want
+        j: which variable is conditioned on
+        val: the value the jth variable has to have
+
+>>>>>>> 4405ac19a18f9ae8361c609e04bbc76300db9a95
         Returns: Pmf
         """
         pmf = Pmf(label=label)
@@ -730,9 +1034,18 @@ class Joint(Pmf):
 
     def MaxLikeInterval(self, percentage=90):
         """Returns the maximum-likelihood credible interval.
+<<<<<<< HEAD
         If percentage=90, computes a 90% CI containing the values
         with the highest likelihoods.
         percentage: float between 0 and 100
+=======
+
+        If percentage=90, computes a 90% CI containing the values
+        with the highest likelihoods.
+
+        percentage: float between 0 and 100
+
+>>>>>>> 4405ac19a18f9ae8361c609e04bbc76300db9a95
         Returns: list of values from the suite
         """
         interval = []
@@ -752,10 +1065,20 @@ class Joint(Pmf):
 
 def MakeJoint(pmf1, pmf2):
     """Joint distribution of values from pmf1 and pmf2.
+<<<<<<< HEAD
     Assumes that the PMFs represent independent random variables.
     Args:
         pmf1: Pmf object
         pmf2: Pmf object
+=======
+
+    Assumes that the PMFs represent independent random variables.
+
+    Args:
+        pmf1: Pmf object
+        pmf2: Pmf object
+
+>>>>>>> 4405ac19a18f9ae8361c609e04bbc76300db9a95
     Returns:
         Joint pmf of value pairs
     """
@@ -768,9 +1091,17 @@ def MakeJoint(pmf1, pmf2):
 
 def MakeHistFromList(t, label=None):
     """Makes a histogram from an unsorted sequence of values.
+<<<<<<< HEAD
     Args:
         t: sequence of numbers
         label: string label for this histogram
+=======
+
+    Args:
+        t: sequence of numbers
+        label: string label for this histogram
+
+>>>>>>> 4405ac19a18f9ae8361c609e04bbc76300db9a95
     Returns:
         Hist object
     """
@@ -779,9 +1110,17 @@ def MakeHistFromList(t, label=None):
 
 def MakeHistFromDict(d, label=None):
     """Makes a histogram from a map from values to frequencies.
+<<<<<<< HEAD
     Args:
         d: dictionary that maps values to frequencies
         label: string label for this histogram
+=======
+
+    Args:
+        d: dictionary that maps values to frequencies
+        label: string label for this histogram
+
+>>>>>>> 4405ac19a18f9ae8361c609e04bbc76300db9a95
     Returns:
         Hist object
     """
@@ -790,9 +1129,17 @@ def MakeHistFromDict(d, label=None):
 
 def MakePmfFromList(t, label=None):
     """Makes a PMF from an unsorted sequence of values.
+<<<<<<< HEAD
     Args:
         t: sequence of numbers
         label: string label for this PMF
+=======
+
+    Args:
+        t: sequence of numbers
+        label: string label for this PMF
+
+>>>>>>> 4405ac19a18f9ae8361c609e04bbc76300db9a95
     Returns:
         Pmf object
     """
@@ -801,9 +1148,17 @@ def MakePmfFromList(t, label=None):
 
 def MakePmfFromDict(d, label=None):
     """Makes a PMF from a map from values to probabilities.
+<<<<<<< HEAD
     Args:
         d: dictionary that maps values to probabilities
         label: string label for this PMF
+=======
+
+    Args:
+        d: dictionary that maps values to probabilities
+        label: string label for this PMF
+
+>>>>>>> 4405ac19a18f9ae8361c609e04bbc76300db9a95
     Returns:
         Pmf object
     """
@@ -812,9 +1167,17 @@ def MakePmfFromDict(d, label=None):
 
 def MakePmfFromItems(t, label=None):
     """Makes a PMF from a sequence of value-probability pairs
+<<<<<<< HEAD
     Args:
         t: sequence of value-probability pairs
         label: string label for this PMF
+=======
+
+    Args:
+        t: sequence of value-probability pairs
+        label: string label for this PMF
+
+>>>>>>> 4405ac19a18f9ae8361c609e04bbc76300db9a95
     Returns:
         Pmf object
     """
@@ -823,9 +1186,17 @@ def MakePmfFromItems(t, label=None):
 
 def MakePmfFromHist(hist, label=None):
     """Makes a normalized PMF from a Hist object.
+<<<<<<< HEAD
     Args:
         hist: Hist object
         label: string label
+=======
+
+    Args:
+        hist: Hist object
+        label: string label
+
+>>>>>>> 4405ac19a18f9ae8361c609e04bbc76300db9a95
     Returns:
         Pmf object
     """
@@ -837,9 +1208,17 @@ def MakePmfFromHist(hist, label=None):
 
 def MakeMixture(metapmf, label='mix'):
     """Make a mixture distribution.
+<<<<<<< HEAD
     Args:
       metapmf: Pmf that maps from Pmfs to probs.
       label: string label for the new Pmf.
+=======
+
+    Args:
+      metapmf: Pmf that maps from Pmfs to probs.
+      label: string label for the new Pmf.
+
+>>>>>>> 4405ac19a18f9ae8361c609e04bbc76300db9a95
     Returns: Pmf object.
     """
     mix = Pmf(label=label)
@@ -851,6 +1230,10 @@ def MakeMixture(metapmf, label='mix'):
 
 def MakeUniformPmf(low, high, n):
     """Make a uniform Pmf.
+<<<<<<< HEAD
+=======
+
+>>>>>>> 4405ac19a18f9ae8361c609e04bbc76300db9a95
     low: lowest value (inclusive)
     high: highest value (inclusize)
     n: number of values
@@ -864,6 +1247,10 @@ def MakeUniformPmf(low, high, n):
 
 class Cdf:
     """Represents a cumulative distribution function.
+<<<<<<< HEAD
+=======
+
+>>>>>>> 4405ac19a18f9ae8361c609e04bbc76300db9a95
     Attributes:
         xs: sequence of values
         ps: sequence of probabilities
@@ -873,6 +1260,10 @@ class Cdf:
         """Initializes.
         
         If ps is provided, obj must be the corresponding list of values.
+<<<<<<< HEAD
+=======
+
+>>>>>>> 4405ac19a18f9ae8361c609e04bbc76300db9a95
         obj: Hist, Pmf, Cdf, Pdf, dict, pandas Series, list of pairs
         ps: list of cumulative probabilities
         label: string label
@@ -958,6 +1349,10 @@ class Cdf:
 
     def Copy(self, label=None):
         """Returns a copy of this Cdf.
+<<<<<<< HEAD
+=======
+
+>>>>>>> 4405ac19a18f9ae8361c609e04bbc76300db9a95
         label: string label for the new Cdf
         """
         if label is None:
@@ -972,6 +1367,10 @@ class Cdf:
 
     def Items(self):
         """Returns a sorted sequence of (value, probability) pairs.
+<<<<<<< HEAD
+=======
+
+>>>>>>> 4405ac19a18f9ae8361c609e04bbc76300db9a95
         Note: in Python3, returns an iterator.
         """
         a = self.ps
@@ -981,6 +1380,10 @@ class Cdf:
 
     def Shift(self, term):
         """Adds a term to the xs.
+<<<<<<< HEAD
+=======
+
+>>>>>>> 4405ac19a18f9ae8361c609e04bbc76300db9a95
         term: how much to add
         """
         new = self.Copy()
@@ -990,6 +1393,10 @@ class Cdf:
 
     def Scale(self, factor):
         """Multiplies the xs by a factor.
+<<<<<<< HEAD
+=======
+
+>>>>>>> 4405ac19a18f9ae8361c609e04bbc76300db9a95
         factor: what to multiply by
         """
         new = self.Copy()
@@ -999,8 +1406,15 @@ class Cdf:
 
     def Prob(self, x):
         """Returns CDF(x), the probability that corresponds to value x.
+<<<<<<< HEAD
         Args:
             x: number
+=======
+
+        Args:
+            x: number
+
+>>>>>>> 4405ac19a18f9ae8361c609e04bbc76300db9a95
         Returns:
             float probability
         """
@@ -1012,7 +1426,13 @@ class Cdf:
 
     def Probs(self, xs):
         """Gets probabilities for a sequence of values.
+<<<<<<< HEAD
         xs: any sequence that can be converted to NumPy array
+=======
+
+        xs: any sequence that can be converted to NumPy array
+
+>>>>>>> 4405ac19a18f9ae8361c609e04bbc76300db9a95
         returns: NumPy array of cumulative probabilities
         """
         xs = np.asarray(xs)
@@ -1025,8 +1445,15 @@ class Cdf:
 
     def Value(self, p):
         """Returns InverseCDF(p), the value that corresponds to probability p.
+<<<<<<< HEAD
         Args:
             p: number in the range [0, 1]
+=======
+
+        Args:
+            p: number in the range [0, 1]
+
+>>>>>>> 4405ac19a18f9ae8361c609e04bbc76300db9a95
         Returns:
             number value
         """
@@ -1038,9 +1465,18 @@ class Cdf:
 
     def Values(self, ps=None):
         """Returns InverseCDF(p), the value that corresponds to probability p.
+<<<<<<< HEAD
         If ps is not provided, returns all values.
         Args:
             ps: NumPy array of numbers in the range [0, 1]
+=======
+
+        If ps is not provided, returns all values.
+
+        Args:
+            ps: NumPy array of numbers in the range [0, 1]
+
+>>>>>>> 4405ac19a18f9ae8361c609e04bbc76300db9a95
         Returns:
             NumPy array of values
         """
@@ -1058,8 +1494,15 @@ class Cdf:
 
     def Percentile(self, p):
         """Returns the value that corresponds to percentile p.
+<<<<<<< HEAD
         Args:
             p: number in the range [0, 100]
+=======
+
+        Args:
+            p: number in the range [0, 100]
+
+>>>>>>> 4405ac19a18f9ae8361c609e04bbc76300db9a95
         Returns:
             number value
         """
@@ -1067,8 +1510,15 @@ class Cdf:
 
     def Percentiles(self, ps):
         """Returns the value that corresponds to percentiles ps.
+<<<<<<< HEAD
         Args:
             ps: numbers in the range [0, 100]
+=======
+
+        Args:
+            ps: numbers in the range [0, 100]
+
+>>>>>>> 4405ac19a18f9ae8361c609e04bbc76300db9a95
         Returns:
             array of values
         """
@@ -1077,14 +1527,26 @@ class Cdf:
 
     def PercentileRank(self, x):
         """Returns the percentile rank of the value x.
+<<<<<<< HEAD
         x: potential value in the CDF
+=======
+
+        x: potential value in the CDF
+
+>>>>>>> 4405ac19a18f9ae8361c609e04bbc76300db9a95
         returns: percentile rank in the range 0 to 100
         """
         return self.Prob(x) * 100
 
     def PercentileRanks(self, xs):
         """Returns the percentile ranks of the values in xs.
+<<<<<<< HEAD
         xs: potential value in the CDF
+=======
+
+        xs: potential value in the CDF
+
+>>>>>>> 4405ac19a18f9ae8361c609e04bbc76300db9a95
         returns: array of percentile ranks in the range 0 to 100
         """
         return self.Probs(x) * 100
@@ -1104,6 +1566,10 @@ class Cdf:
 
     def Mean(self):
         """Computes the mean of a CDF.
+<<<<<<< HEAD
+=======
+
+>>>>>>> 4405ac19a18f9ae8361c609e04bbc76300db9a95
         Returns:
             float mean
         """
@@ -1117,9 +1583,18 @@ class Cdf:
 
     def CredibleInterval(self, percentage=90):
         """Computes the central credible interval.
+<<<<<<< HEAD
         If percentage=90, computes the 90% CI.
         Args:
             percentage: float between 0 and 100
+=======
+
+        If percentage=90, computes the 90% CI.
+
+        Args:
+            percentage: float between 0 and 100
+
+>>>>>>> 4405ac19a18f9ae8361c609e04bbc76300db9a95
         Returns:
             sequence of two floats, low and high
         """
@@ -1141,9 +1616,18 @@ class Cdf:
 
     def Render(self, **options):
         """Generates a sequence of points suitable for plotting.
+<<<<<<< HEAD
         An empirical CDF is a step function; linear interpolation
         can be misleading.
         Note: options are ignored
+=======
+
+        An empirical CDF is a step function; linear interpolation
+        can be misleading.
+
+        Note: options are ignored
+
+>>>>>>> 4405ac19a18f9ae8361c609e04bbc76300db9a95
         Returns:
             tuple of (xs, ps)
         """
@@ -1162,7 +1646,13 @@ class Cdf:
 
     def Max(self, k):
         """Computes the CDF of the maximum of k selections from this dist.
+<<<<<<< HEAD
         k: int
+=======
+
+        k: int
+
+>>>>>>> 4405ac19a18f9ae8361c609e04bbc76300db9a95
         returns: new Cdf
         """
         cdf = self.Copy()
@@ -1172,9 +1662,17 @@ class Cdf:
 
 def MakeCdfFromItems(items, label=None):
     """Makes a cdf from an unsorted sequence of (value, frequency) pairs.
+<<<<<<< HEAD
     Args:
         items: unsorted sequence of (value, frequency) pairs
         label: string label for this CDF
+=======
+
+    Args:
+        items: unsorted sequence of (value, frequency) pairs
+        label: string label for this CDF
+
+>>>>>>> 4405ac19a18f9ae8361c609e04bbc76300db9a95
     Returns:
         cdf: list of (value, fraction) pairs
     """
@@ -1183,9 +1681,17 @@ def MakeCdfFromItems(items, label=None):
 
 def MakeCdfFromDict(d, label=None):
     """Makes a CDF from a dictionary that maps values to frequencies.
+<<<<<<< HEAD
     Args:
        d: dictionary that maps values to frequencies.
        label: string label for the data.
+=======
+
+    Args:
+       d: dictionary that maps values to frequencies.
+       label: string label for the data.
+
+>>>>>>> 4405ac19a18f9ae8361c609e04bbc76300db9a95
     Returns:
         Cdf object
     """
@@ -1194,9 +1700,17 @@ def MakeCdfFromDict(d, label=None):
 
 def MakeCdfFromList(seq, label=None):
     """Creates a CDF from an unsorted sequence.
+<<<<<<< HEAD
     Args:
         seq: unsorted sequence of sortable values
         label: string label for the cdf
+=======
+
+    Args:
+        seq: unsorted sequence of sortable values
+        label: string label for the cdf
+
+>>>>>>> 4405ac19a18f9ae8361c609e04bbc76300db9a95
     Returns:
        Cdf object
     """
@@ -1205,9 +1719,17 @@ def MakeCdfFromList(seq, label=None):
 
 def MakeCdfFromHist(hist, label=None):
     """Makes a CDF from a Hist object.
+<<<<<<< HEAD
     Args:
        hist: Pmf.Hist object
        label: string label for the data.
+=======
+
+    Args:
+       hist: Pmf.Hist object
+       label: string label for the data.
+
+>>>>>>> 4405ac19a18f9ae8361c609e04bbc76300db9a95
     Returns:
         Cdf object
     """
@@ -1219,9 +1741,17 @@ def MakeCdfFromHist(hist, label=None):
 
 def MakeCdfFromPmf(pmf, label=None):
     """Makes a CDF from a Pmf object.
+<<<<<<< HEAD
     Args:
        pmf: Pmf.Pmf object
        label: string label for the data.
+=======
+
+    Args:
+       pmf: Pmf.Pmf object
+       label: string label for the data.
+
+>>>>>>> 4405ac19a18f9ae8361c609e04bbc76300db9a95
     Returns:
         Cdf object
     """
@@ -1240,7 +1770,13 @@ class Suite(Pmf):
 
     def Update(self, data):
         """Updates each hypothesis based on the data.
+<<<<<<< HEAD
         data: any representation of the data
+=======
+
+        data: any representation of the data
+
+>>>>>>> 4405ac19a18f9ae8361c609e04bbc76300db9a95
         returns: the normalizing constant
         """
         for hypo in self.Values():
@@ -1250,9 +1786,18 @@ class Suite(Pmf):
 
     def LogUpdate(self, data):
         """Updates a suite of hypotheses based on new data.
+<<<<<<< HEAD
         Modifies the suite directly; if you want to keep the original, make
         a copy.
         Note: unlike Update, LogUpdate does not normalize.
+=======
+
+        Modifies the suite directly; if you want to keep the original, make
+        a copy.
+
+        Note: unlike Update, LogUpdate does not normalize.
+
+>>>>>>> 4405ac19a18f9ae8361c609e04bbc76300db9a95
         Args:
             data: any representation of the data
         """
@@ -1262,11 +1807,23 @@ class Suite(Pmf):
 
     def UpdateSet(self, dataset):
         """Updates each hypothesis based on the dataset.
+<<<<<<< HEAD
         This is more efficient than calling Update repeatedly because
         it waits until the end to Normalize.
         Modifies the suite directly; if you want to keep the original, make
         a copy.
         dataset: a sequence of data
+=======
+
+        This is more efficient than calling Update repeatedly because
+        it waits until the end to Normalize.
+
+        Modifies the suite directly; if you want to keep the original, make
+        a copy.
+
+        dataset: a sequence of data
+
+>>>>>>> 4405ac19a18f9ae8361c609e04bbc76300db9a95
         returns: the normalizing constant
         """
         for data in dataset:
@@ -1277,9 +1834,18 @@ class Suite(Pmf):
 
     def LogUpdateSet(self, dataset):
         """Updates each hypothesis based on the dataset.
+<<<<<<< HEAD
         Modifies the suite directly; if you want to keep the original, make
         a copy.
         dataset: a sequence of data
+=======
+
+        Modifies the suite directly; if you want to keep the original, make
+        a copy.
+
+        dataset: a sequence of data
+
+>>>>>>> 4405ac19a18f9ae8361c609e04bbc76300db9a95
         returns: None
         """
         for data in dataset:
@@ -1287,6 +1853,10 @@ class Suite(Pmf):
 
     def Likelihood(self, data, hypo):
         """Computes the likelihood of the data under the hypothesis.
+<<<<<<< HEAD
+=======
+
+>>>>>>> 4405ac19a18f9ae8361c609e04bbc76300db9a95
         hypo: some representation of the hypothesis
         data: some representation of the data
         """
@@ -1294,6 +1864,10 @@ class Suite(Pmf):
 
     def LogLikelihood(self, data, hypo):
         """Computes the log likelihood of the data under the hypothesis.
+<<<<<<< HEAD
+=======
+
+>>>>>>> 4405ac19a18f9ae8361c609e04bbc76300db9a95
         hypo: some representation of the hypothesis
         data: some representation of the data
         """
@@ -1306,6 +1880,10 @@ class Suite(Pmf):
 
     def MakeOdds(self):
         """Transforms from probabilities to odds.
+<<<<<<< HEAD
+=======
+
+>>>>>>> 4405ac19a18f9ae8361c609e04bbc76300db9a95
         Values with prob=0 are removed.
         """
         for hypo, prob in self.Items():
@@ -1322,9 +1900,17 @@ class Suite(Pmf):
 
 def MakeSuiteFromList(t, label=None):
     """Makes a suite from an unsorted sequence of values.
+<<<<<<< HEAD
     Args:
         t: sequence of numbers
         label: string label for this suite
+=======
+
+    Args:
+        t: sequence of numbers
+        label: string label for this suite
+
+>>>>>>> 4405ac19a18f9ae8361c609e04bbc76300db9a95
     Returns:
         Suite object
     """
@@ -1335,9 +1921,17 @@ def MakeSuiteFromList(t, label=None):
 
 def MakeSuiteFromHist(hist, label=None):
     """Makes a normalized suite from a Hist object.
+<<<<<<< HEAD
     Args:
         hist: Hist object
         label: string label
+=======
+
+    Args:
+        hist: Hist object
+        label: string label
+
+>>>>>>> 4405ac19a18f9ae8361c609e04bbc76300db9a95
     Returns:
         Suite object
     """
@@ -1351,9 +1945,17 @@ def MakeSuiteFromHist(hist, label=None):
 
 def MakeSuiteFromDict(d, label=None):
     """Makes a suite from a map from values to probabilities.
+<<<<<<< HEAD
     Args:
         d: dictionary that maps values to probabilities
         label: string label for this suite
+=======
+
+    Args:
+        d: dictionary that maps values to probabilities
+        label: string label for this suite
+
+>>>>>>> 4405ac19a18f9ae8361c609e04bbc76300db9a95
     Returns:
         Suite object
     """
@@ -1368,24 +1970,42 @@ class Pdf(object):
 
     def Density(self, x):
         """Evaluates this Pdf at x.
+<<<<<<< HEAD
+=======
+
+>>>>>>> 4405ac19a18f9ae8361c609e04bbc76300db9a95
         Returns: float or NumPy array of probability density
         """
         raise UnimplementedMethodException()
 
     def GetLinspace(self):
         """Get a linspace for plotting.
+<<<<<<< HEAD
         Not all subclasses of Pdf implement this.
+=======
+
+        Not all subclasses of Pdf implement this.
+
+>>>>>>> 4405ac19a18f9ae8361c609e04bbc76300db9a95
         Returns: numpy array
         """
         raise UnimplementedMethodException()
 
     def MakePmf(self, **options):
         """Makes a discrete version of this Pdf.
+<<<<<<< HEAD
+=======
+
+>>>>>>> 4405ac19a18f9ae8361c609e04bbc76300db9a95
         options can include
         label: string
         low: low end of range
         high: high end of range
         n: number of places to evaluate
+<<<<<<< HEAD
+=======
+
+>>>>>>> 4405ac19a18f9ae8361c609e04bbc76300db9a95
         Returns: new Pmf
         """
         label = options.pop('label', '')
@@ -1394,11 +2014,23 @@ class Pdf(object):
 
     def Render(self, **options):
         """Generates a sequence of points suitable for plotting.
+<<<<<<< HEAD
         If options includes low and high, it must also include n;
         in that case the density is evaluated an n locations between
         low and high, including both.
         If options includes xs, the density is evaluate at those location.
         Otherwise, self.GetLinspace is invoked to provide the locations.
+=======
+
+        If options includes low and high, it must also include n;
+        in that case the density is evaluated an n locations between
+        low and high, including both.
+
+        If options includes xs, the density is evaluate at those location.
+
+        Otherwise, self.GetLinspace is invoked to provide the locations.
+
+>>>>>>> 4405ac19a18f9ae8361c609e04bbc76300db9a95
         Returns:
             tuple of (xs, densities)
         """
@@ -1425,6 +2057,10 @@ class NormalPdf(Pdf):
 
     def __init__(self, mu=0, sigma=1, label=None):
         """Constructs a Normal Pdf with given mu and sigma.
+<<<<<<< HEAD
+=======
+
+>>>>>>> 4405ac19a18f9ae8361c609e04bbc76300db9a95
         mu: mean
         sigma: standard deviation
         label: string
@@ -1438,6 +2074,10 @@ class NormalPdf(Pdf):
 
     def GetLinspace(self):
         """Get a linspace for plotting.
+<<<<<<< HEAD
+=======
+
+>>>>>>> 4405ac19a18f9ae8361c609e04bbc76300db9a95
         Returns: numpy array
         """
         low, high = self.mu-3*self.sigma, self.mu+3*self.sigma
@@ -1445,7 +2085,13 @@ class NormalPdf(Pdf):
 
     def Density(self, xs):
         """Evaluates this Pdf at xs.
+<<<<<<< HEAD
         xs: scalar or sequence of floats
+=======
+
+        xs: scalar or sequence of floats
+
+>>>>>>> 4405ac19a18f9ae8361c609e04bbc76300db9a95
         returns: float or NumPy array of probability density
         """
         return stats.norm.pdf(xs, self.mu, self.sigma)
@@ -1456,6 +2102,10 @@ class ExponentialPdf(Pdf):
 
     def __init__(self, lam=1, label=None):
         """Constructs an exponential Pdf with given parameter.
+<<<<<<< HEAD
+=======
+
+>>>>>>> 4405ac19a18f9ae8361c609e04bbc76300db9a95
         lam: rate parameter
         label: string
         """
@@ -1467,6 +2117,10 @@ class ExponentialPdf(Pdf):
 
     def GetLinspace(self):
         """Get a linspace for plotting.
+<<<<<<< HEAD
+=======
+
+>>>>>>> 4405ac19a18f9ae8361c609e04bbc76300db9a95
         Returns: numpy array
         """
         low, high = 0, 5.0/self.lam
@@ -1474,7 +2128,13 @@ class ExponentialPdf(Pdf):
 
     def Density(self, xs):
         """Evaluates this Pdf at xs.
+<<<<<<< HEAD
         xs: scalar or sequence of floats
+=======
+
+        xs: scalar or sequence of floats
+
+>>>>>>> 4405ac19a18f9ae8361c609e04bbc76300db9a95
         returns: float or NumPy array of probability density
         """
         return stats.expon.pdf(xs, scale=1.0/self.lam)
@@ -1485,6 +2145,10 @@ class EstimatedPdf(Pdf):
 
     def __init__(self, sample, label=None):
         """Estimates the density function based on a sample.
+<<<<<<< HEAD
+=======
+
+>>>>>>> 4405ac19a18f9ae8361c609e04bbc76300db9a95
         sample: sequence of data
         label: string
         """
@@ -1499,18 +2163,30 @@ class EstimatedPdf(Pdf):
 
     def GetLinspace(self):
         """Get a linspace for plotting.
+<<<<<<< HEAD
+=======
+
+>>>>>>> 4405ac19a18f9ae8361c609e04bbc76300db9a95
         Returns: numpy array
         """
         return self.linspace
 
     def Density(self, xs):
         """Evaluates this Pdf at xs.
+<<<<<<< HEAD
+=======
+
+>>>>>>> 4405ac19a18f9ae8361c609e04bbc76300db9a95
         returns: float or NumPy array of probability density
         """
         return self.kde.evaluate(xs)
 
     def Sample(self, n):
         """Generates a random sample from the estimated Pdf.
+<<<<<<< HEAD
+=======
+
+>>>>>>> 4405ac19a18f9ae8361c609e04bbc76300db9a95
         n: size of sample
         """
         # NOTE: we have to flatten because resample returns a 2-D
@@ -1520,10 +2196,20 @@ class EstimatedPdf(Pdf):
 
 def CredibleInterval(pmf, percentage=90):
     """Computes a credible interval for a given distribution.
+<<<<<<< HEAD
     If percentage=90, computes the 90% CI.
     Args:
         pmf: Pmf object representing a posterior distribution
         percentage: float between 0 and 100
+=======
+
+    If percentage=90, computes the 90% CI.
+
+    Args:
+        pmf: Pmf object representing a posterior distribution
+        percentage: float between 0 and 100
+
+>>>>>>> 4405ac19a18f9ae8361c609e04bbc76300db9a95
     Returns:
         sequence of two floats, low and high
     """
@@ -1535,9 +2221,17 @@ def CredibleInterval(pmf, percentage=90):
 
 def PmfProbLess(pmf1, pmf2):
     """Probability that a value from pmf1 is less than a value from pmf2.
+<<<<<<< HEAD
     Args:
         pmf1: Pmf object
         pmf2: Pmf object
+=======
+
+    Args:
+        pmf1: Pmf object
+        pmf2: Pmf object
+
+>>>>>>> 4405ac19a18f9ae8361c609e04bbc76300db9a95
     Returns:
         float probability
     """
@@ -1551,9 +2245,17 @@ def PmfProbLess(pmf1, pmf2):
 
 def PmfProbGreater(pmf1, pmf2):
     """Probability that a value from pmf1 is less than a value from pmf2.
+<<<<<<< HEAD
     Args:
         pmf1: Pmf object
         pmf2: Pmf object
+=======
+
+    Args:
+        pmf1: Pmf object
+        pmf2: Pmf object
+
+>>>>>>> 4405ac19a18f9ae8361c609e04bbc76300db9a95
     Returns:
         float probability
     """
@@ -1567,9 +2269,17 @@ def PmfProbGreater(pmf1, pmf2):
 
 def PmfProbEqual(pmf1, pmf2):
     """Probability that a value from pmf1 equals a value from pmf2.
+<<<<<<< HEAD
     Args:
         pmf1: Pmf object
         pmf2: Pmf object
+=======
+
+    Args:
+        pmf1: Pmf object
+        pmf2: Pmf object
+
+>>>>>>> 4405ac19a18f9ae8361c609e04bbc76300db9a95
     Returns:
         float probability
     """
@@ -1583,7 +2293,13 @@ def PmfProbEqual(pmf1, pmf2):
 
 def RandomSum(dists):
     """Chooses a random value from each dist and returns the sum.
+<<<<<<< HEAD
     dists: sequence of Pmf or Cdf objects
+=======
+
+    dists: sequence of Pmf or Cdf objects
+
+>>>>>>> 4405ac19a18f9ae8361c609e04bbc76300db9a95
     returns: numerical sum
     """
     total = sum(dist.Random() for dist in dists)
@@ -1592,8 +2308,15 @@ def RandomSum(dists):
 
 def SampleSum(dists, n):
     """Draws a sample of sums from a list of distributions.
+<<<<<<< HEAD
     dists: sequence of Pmf or Cdf objects
     n: sample size
+=======
+
+    dists: sequence of Pmf or Cdf objects
+    n: sample size
+
+>>>>>>> 4405ac19a18f9ae8361c609e04bbc76300db9a95
     returns: new Pmf of sums
     """
     pmf = Pmf(RandomSum(dists) for i in range(n))
@@ -1602,6 +2325,10 @@ def SampleSum(dists, n):
 
 def EvalNormalPdf(x, mu, sigma):
     """Computes the unnormalized PDF of the normal distribution.
+<<<<<<< HEAD
+=======
+
+>>>>>>> 4405ac19a18f9ae8361c609e04bbc76300db9a95
     x: value
     mu: mean
     sigma: standard deviation
@@ -1618,6 +2345,10 @@ def MakeNormalPmf(mu, sigma, num_sigmas, n=201):
     sigma: float standard deviation
     num_sigmas: how many sigmas to extend in each direction
     n: number of values in the Pmf
+<<<<<<< HEAD
+=======
+
+>>>>>>> 4405ac19a18f9ae8361c609e04bbc76300db9a95
     returns: normalized Pmf
     """
     pmf = Pmf()
@@ -1633,6 +2364,10 @@ def MakeNormalPmf(mu, sigma, num_sigmas, n=201):
 
 def EvalBinomialPmf(k, n, p):
     """Evaluates the binomial PMF.
+<<<<<<< HEAD
+=======
+
+>>>>>>> 4405ac19a18f9ae8361c609e04bbc76300db9a95
     Returns the probabily of k successes in n trials with probability p.
     """
     return stats.binom.pmf(k, n, p)
@@ -1640,6 +2375,10 @@ def EvalBinomialPmf(k, n, p):
 
 def MakeBinomialPmf(n, p):
     """Evaluates the binomial PMF.
+<<<<<<< HEAD
+=======
+
+>>>>>>> 4405ac19a18f9ae8361c609e04bbc76300db9a95
     Returns the distribution of successes in n trials with probability p.
     """
     pmf = Pmf()
@@ -1650,8 +2389,15 @@ def MakeBinomialPmf(n, p):
 
 def EvalGammaPdf(x, a):
     """Computes the Gamma PDF.
+<<<<<<< HEAD
     x: where to evaluate the PDF
     a: parameter of the gamma distribution
+=======
+
+    x: where to evaluate the PDF
+    a: parameter of the gamma distribution
+
+>>>>>>> 4405ac19a18f9ae8361c609e04bbc76300db9a95
     returns: float probability
     """
     return x**(a-1) * np.exp(-x) / gamma(a)
@@ -1659,8 +2405,15 @@ def EvalGammaPdf(x, a):
 
 def MakeGammaPmf(xs, a):
     """Makes a PMF discrete approx to a Gamma distribution.
+<<<<<<< HEAD
     lam: parameter lambda in events per unit time
     xs: upper bound of the Pmf
+=======
+
+    lam: parameter lambda in events per unit time
+    xs: upper bound of the Pmf
+
+>>>>>>> 4405ac19a18f9ae8361c609e04bbc76300db9a95
     returns: normalized Pmf
     """
     xs = np.asarray(xs)
@@ -1672,8 +2425,15 @@ def MakeGammaPmf(xs, a):
 
 def EvalGeometricPmf(k, p, loc=0):
     """Evaluates the geometric PMF.
+<<<<<<< HEAD
     With loc=0: Probability of `k` trials to get one success.
     With loc=-1: Probability of `k` trials before first success.
+=======
+
+    With loc=0: Probability of `k` trials to get one success.
+    With loc=-1: Probability of `k` trials before first success.
+
+>>>>>>> 4405ac19a18f9ae8361c609e04bbc76300db9a95
     k: number of trials
     p: probability of success on each trial
     """
@@ -1682,8 +2442,15 @@ def EvalGeometricPmf(k, p, loc=0):
 
 def MakeGeometricPmf(p, loc=0, high=10):
     """Evaluates the binomial PMF.
+<<<<<<< HEAD
     With loc=0: PMF of trials to get one success.
     With loc=-1: PMF of trials before first success.
+=======
+
+    With loc=0: PMF of trials to get one success.
+    With loc=-1: PMF of trials before first success.
+
+>>>>>>> 4405ac19a18f9ae8361c609e04bbc76300db9a95
     p: probability of success
     high: upper bound where PMF is truncated
     """
@@ -1696,6 +2463,10 @@ def MakeGeometricPmf(p, loc=0, high=10):
 
 def EvalHypergeomPmf(k, N, K, n):
     """Evaluates the hypergeometric PMF.
+<<<<<<< HEAD
+=======
+
+>>>>>>> 4405ac19a18f9ae8361c609e04bbc76300db9a95
     Returns the probabily of k successes in n trials from a population
     N with K successes in it.
     """
@@ -1704,8 +2475,15 @@ def EvalHypergeomPmf(k, N, K, n):
 
 def EvalPoissonPmf(k, lam):
     """Computes the Poisson PMF.
+<<<<<<< HEAD
     k: number of events
     lam: parameter lambda in events per unit time
+=======
+
+    k: number of events
+    lam: parameter lambda in events per unit time
+
+>>>>>>> 4405ac19a18f9ae8361c609e04bbc76300db9a95
     returns: float probability
     """
     return stats.poisson.pmf(k, lam)
@@ -1713,8 +2491,15 @@ def EvalPoissonPmf(k, lam):
 
 def MakePoissonPmf(lam, high, step=1):
     """Makes a PMF discrete approx to a Poisson distribution.
+<<<<<<< HEAD
     lam: parameter lambda in events per unit time
     high: upper bound of the Pmf
+=======
+
+    lam: parameter lambda in events per unit time
+    high: upper bound of the Pmf
+
+>>>>>>> 4405ac19a18f9ae8361c609e04bbc76300db9a95
     returns: normalized Pmf
     """
     pmf = Pmf()
@@ -1727,8 +2512,15 @@ def MakePoissonPmf(lam, high, step=1):
 
 def EvalExponentialPdf(x, lam):
     """Computes the exponential PDF.
+<<<<<<< HEAD
     x: value
     lam: parameter lambda in events per unit time
+=======
+
+    x: value
+    lam: parameter lambda in events per unit time
+
+>>>>>>> 4405ac19a18f9ae8361c609e04bbc76300db9a95
     returns: float probability density
     """
     return lam * math.exp(-lam * x)
@@ -1741,9 +2533,17 @@ def EvalExponentialCdf(x, lam):
 
 def MakeExponentialPmf(lam, high, n=200):
     """Makes a PMF discrete approx to an exponential distribution.
+<<<<<<< HEAD
     lam: parameter lambda in events per unit time
     high: upper bound
     n: number of values in the Pmf
+=======
+
+    lam: parameter lambda in events per unit time
+    high: upper bound
+    n: number of values in the Pmf
+
+>>>>>>> 4405ac19a18f9ae8361c609e04bbc76300db9a95
     returns: normalized Pmf
     """
     pmf = Pmf()
@@ -1756,9 +2556,17 @@ def MakeExponentialPmf(lam, high, n=200):
 
 def EvalWeibullPdf(x, lam, k):
     """Computes the Weibull PDF.
+<<<<<<< HEAD
     x: value
     lam: parameter lambda in events per unit time
     k: parameter
+=======
+
+    x: value
+    lam: parameter lambda in events per unit time
+    k: parameter
+
+>>>>>>> 4405ac19a18f9ae8361c609e04bbc76300db9a95
     returns: float probability density
     """
     arg = (x / lam)
@@ -1773,10 +2581,18 @@ def EvalWeibullCdf(x, lam, k):
 
 def MakeWeibullPmf(lam, k, high, n=200):
     """Makes a PMF discrete approx to a Weibull distribution.
+<<<<<<< HEAD
+=======
+
+>>>>>>> 4405ac19a18f9ae8361c609e04bbc76300db9a95
     lam: parameter lambda in events per unit time
     k: parameter
     high: upper bound
     n: number of values in the Pmf
+<<<<<<< HEAD
+=======
+
+>>>>>>> 4405ac19a18f9ae8361c609e04bbc76300db9a95
     returns: normalized Pmf
     """
     xs = np.linspace(0, high, n)
@@ -1787,8 +2603,15 @@ def MakeWeibullPmf(lam, k, high, n=200):
 
 def EvalParetoPdf(x, xm, alpha):
     """Computes the Pareto.
+<<<<<<< HEAD
     xm: minimum value (scale parameter)
     alpha: shape parameter
+=======
+
+    xm: minimum value (scale parameter)
+    alpha: shape parameter
+
+>>>>>>> 4405ac19a18f9ae8361c609e04bbc76300db9a95
     returns: float probability density
     """
     return stats.pareto.pdf(x, alpha, scale=xm)
@@ -1796,10 +2619,18 @@ def EvalParetoPdf(x, xm, alpha):
 
 def MakeParetoPmf(xm, alpha, high, num=101):
     """Makes a PMF discrete approx to a Pareto distribution.
+<<<<<<< HEAD
+=======
+
+>>>>>>> 4405ac19a18f9ae8361c609e04bbc76300db9a95
     xm: minimum value (scale parameter)
     alpha: shape parameter
     high: upper bound value
     num: number of values
+<<<<<<< HEAD
+=======
+
+>>>>>>> 4405ac19a18f9ae8361c609e04bbc76300db9a95
     returns: normalized Pmf
     """
     xs = np.linspace(xm, high, num)
@@ -1812,6 +2643,10 @@ def StandardNormalCdf(x):
     
     See http://en.wikipedia.org/wiki/Normal_distribution
     #Cumulative_distribution_function
+<<<<<<< HEAD
+=======
+
+>>>>>>> 4405ac19a18f9ae8361c609e04bbc76300db9a95
     Args:
         x: float
                 
@@ -1826,6 +2661,10 @@ def EvalNormalCdf(x, mu=0, sigma=1):
     
     Args:
         x: float
+<<<<<<< HEAD
+=======
+
+>>>>>>> 4405ac19a18f9ae8361c609e04bbc76300db9a95
         mu: mean parameter
         
         sigma: standard deviation parameter
@@ -1838,9 +2677,18 @@ def EvalNormalCdf(x, mu=0, sigma=1):
 
 def EvalNormalCdfInverse(p, mu=0, sigma=1):
     """Evaluates the inverse CDF of the normal distribution.
+<<<<<<< HEAD
     See http://en.wikipedia.org/wiki/Normal_distribution#Quantile_function  
     Args:
         p: float
+=======
+
+    See http://en.wikipedia.org/wiki/Normal_distribution#Quantile_function  
+
+    Args:
+        p: float
+
+>>>>>>> 4405ac19a18f9ae8361c609e04bbc76300db9a95
         mu: mean parameter
         
         sigma: standard deviation parameter
@@ -1865,10 +2713,18 @@ def EvalLognormalCdf(x, mu=0, sigma=1):
 
 def RenderExpoCdf(lam, low, high, n=101):
     """Generates sequences of xs and ps for an exponential CDF.
+<<<<<<< HEAD
+=======
+
+>>>>>>> 4405ac19a18f9ae8361c609e04bbc76300db9a95
     lam: parameter
     low: float
     high: float
     n: number of points to render
+<<<<<<< HEAD
+=======
+
+>>>>>>> 4405ac19a18f9ae8361c609e04bbc76300db9a95
     returns: numpy arrays (xs, ps)
     """
     xs = np.linspace(low, high, n)
@@ -1879,11 +2735,19 @@ def RenderExpoCdf(lam, low, high, n=101):
 
 def RenderNormalCdf(mu, sigma, low, high, n=101):
     """Generates sequences of xs and ps for a Normal CDF.
+<<<<<<< HEAD
+=======
+
+>>>>>>> 4405ac19a18f9ae8361c609e04bbc76300db9a95
     mu: parameter
     sigma: parameter
     low: float
     high: float
     n: number of points to render
+<<<<<<< HEAD
+=======
+
+>>>>>>> 4405ac19a18f9ae8361c609e04bbc76300db9a95
     returns: numpy arrays (xs, ps)
     """
     xs = np.linspace(low, high, n)
@@ -1893,11 +2757,19 @@ def RenderNormalCdf(mu, sigma, low, high, n=101):
 
 def RenderParetoCdf(xmin, alpha, low, high, n=50):
     """Generates sequences of xs and ps for a Pareto CDF.
+<<<<<<< HEAD
+=======
+
+>>>>>>> 4405ac19a18f9ae8361c609e04bbc76300db9a95
     xmin: parameter
     alpha: parameter
     low: float
     high: float
     n: number of points to render
+<<<<<<< HEAD
+=======
+
+>>>>>>> 4405ac19a18f9ae8361c609e04bbc76300db9a95
     returns: numpy arrays (xs, ps)
     """
     if low < xmin:
@@ -1910,6 +2782,10 @@ def RenderParetoCdf(xmin, alpha, low, high, n=50):
 
 class Beta:
     """Represents a Beta distribution.
+<<<<<<< HEAD
+=======
+
+>>>>>>> 4405ac19a18f9ae8361c609e04bbc76300db9a95
     See http://en.wikipedia.org/wiki/Beta_distribution
     """
     def __init__(self, alpha=1, beta=1, label=None):
@@ -1920,6 +2796,10 @@ class Beta:
 
     def Update(self, data):
         """Updates a Beta distribution.
+<<<<<<< HEAD
+=======
+
+>>>>>>> 4405ac19a18f9ae8361c609e04bbc76300db9a95
         data: pair of int (heads, tails)
         """
         heads, tails = data
@@ -1942,6 +2822,10 @@ class Beta:
 
     def Sample(self, n):
         """Generates a random sample from this distribution.
+<<<<<<< HEAD
+=======
+
+>>>>>>> 4405ac19a18f9ae8361c609e04bbc76300db9a95
         n: int sample size
         """
         size = n,
@@ -1953,13 +2837,25 @@ class Beta:
 
     def MakePmf(self, steps=101, label=None):
         """Returns a Pmf of this distribution.
+<<<<<<< HEAD
         Note: Normally, we just evaluate the PDF at a sequence
         of points and treat the probability density as a probability
         mass.
+=======
+
+        Note: Normally, we just evaluate the PDF at a sequence
+        of points and treat the probability density as a probability
+        mass.
+
+>>>>>>> 4405ac19a18f9ae8361c609e04bbc76300db9a95
         But if alpha or beta is less than one, we have to be
         more careful because the PDF goes to infinity at x=0
         and x=1.  In that case we evaluate the CDF and compute
         differences.
+<<<<<<< HEAD
+=======
+
+>>>>>>> 4405ac19a18f9ae8361c609e04bbc76300db9a95
         The result is a little funny, because the values at 0 and 1
         are not symmetric.  Nevertheless, it is a reasonable discrete
         model of the continuous distribution, and behaves well as
@@ -1987,6 +2883,10 @@ class Beta:
 
     def Percentile(self, ps):
         """Returns the given percentiles from this distribution.
+<<<<<<< HEAD
+=======
+
+>>>>>>> 4405ac19a18f9ae8361c609e04bbc76300db9a95
         ps: scalar, array, or list of [0-100]
         """
         ps = np.asarray(ps) / 100
@@ -1996,11 +2896,19 @@ class Beta:
 
 class Dirichlet(object):
     """Represents a Dirichlet distribution.
+<<<<<<< HEAD
+=======
+
+>>>>>>> 4405ac19a18f9ae8361c609e04bbc76300db9a95
     See http://en.wikipedia.org/wiki/Dirichlet_distribution
     """
 
     def __init__(self, n, conc=1, label=None):
         """Initializes a Dirichlet distribution.
+<<<<<<< HEAD
+=======
+
+>>>>>>> 4405ac19a18f9ae8361c609e04bbc76300db9a95
         n: number of dimensions
         conc: concentration parameter (smaller yields more concentration)
         label: string label
@@ -2015,6 +2923,10 @@ class Dirichlet(object):
 
     def Update(self, data):
         """Updates a Dirichlet distribution.
+<<<<<<< HEAD
+=======
+
+>>>>>>> 4405ac19a18f9ae8361c609e04bbc76300db9a95
         data: sequence of observations, in order corresponding to params
         """
         m = len(data)
@@ -2022,6 +2934,10 @@ class Dirichlet(object):
 
     def Random(self):
         """Generates a random variate from this distribution.
+<<<<<<< HEAD
+=======
+
+>>>>>>> 4405ac19a18f9ae8361c609e04bbc76300db9a95
         Returns: normalized vector of fractions
         """
         p = np.random.gamma(self.params)
@@ -2029,7 +2945,13 @@ class Dirichlet(object):
 
     def Likelihood(self, data):
         """Computes the likelihood of the data.
+<<<<<<< HEAD
         Selects a random vector of probabilities from this distribution.
+=======
+
+        Selects a random vector of probabilities from this distribution.
+
+>>>>>>> 4405ac19a18f9ae8361c609e04bbc76300db9a95
         Returns: float probability
         """
         m = len(data)
@@ -2043,7 +2965,13 @@ class Dirichlet(object):
 
     def LogLikelihood(self, data):
         """Computes the log likelihood of the data.
+<<<<<<< HEAD
         Selects a random vector of probabilities from this distribution.
+=======
+
+        Selects a random vector of probabilities from this distribution.
+
+>>>>>>> 4405ac19a18f9ae8361c609e04bbc76300db9a95
         Returns: float log probability
         """
         m = len(data)
@@ -2056,9 +2984,18 @@ class Dirichlet(object):
 
     def MarginalBeta(self, i):
         """Computes the marginal distribution of the ith element.
+<<<<<<< HEAD
         See http://en.wikipedia.org/wiki/Dirichlet_distribution
         #Marginal_distributions
         i: int
+=======
+
+        See http://en.wikipedia.org/wiki/Dirichlet_distribution
+        #Marginal_distributions
+
+        i: int
+
+>>>>>>> 4405ac19a18f9ae8361c609e04bbc76300db9a95
         Returns: Beta object
         """
         alpha0 = self.params.sum()
@@ -2067,7 +3004,13 @@ class Dirichlet(object):
 
     def PredictivePmf(self, xs, label=None):
         """Makes a predictive distribution.
+<<<<<<< HEAD
         xs: values to go into the Pmf
+=======
+
+        xs: values to go into the Pmf
+
+>>>>>>> 4405ac19a18f9ae8361c609e04bbc76300db9a95
         Returns: Pmf that maps from x to the mean prevalence of x
         """
         alpha0 = self.params.sum()
@@ -2077,8 +3020,15 @@ class Dirichlet(object):
 
 def BinomialCoef(n, k):
     """Compute the binomial coefficient "n choose k".
+<<<<<<< HEAD
     n: number of trials
     k: number of successes
+=======
+
+    n: number of trials
+    k: number of successes
+
+>>>>>>> 4405ac19a18f9ae8361c609e04bbc76300db9a95
     Returns: float
     """
     return scipy.misc.comb(n, k)
@@ -2086,10 +3036,20 @@ def BinomialCoef(n, k):
 
 def LogBinomialCoef(n, k):
     """Computes the log of the binomial coefficient.
+<<<<<<< HEAD
     http://math.stackexchange.com/questions/64716/
     approximating-the-logarithm-of-the-binomial-coefficient
     n: number of trials
     k: number of successes
+=======
+
+    http://math.stackexchange.com/questions/64716/
+    approximating-the-logarithm-of-the-binomial-coefficient
+
+    n: number of trials
+    k: number of successes
+
+>>>>>>> 4405ac19a18f9ae8361c609e04bbc76300db9a95
     Returns: float
     """
     return n * math.log(n) - k * math.log(k) - (n - k) * math.log(n - k)
@@ -2097,8 +3057,15 @@ def LogBinomialCoef(n, k):
 
 def NormalProbability(ys, jitter=0):
     """Generates data for a normal probability plot.
+<<<<<<< HEAD
     ys: sequence of values
     jitter: float magnitude of jitter added to the ys 
+=======
+
+    ys: sequence of values
+    jitter: float magnitude of jitter added to the ys 
+
+>>>>>>> 4405ac19a18f9ae8361c609e04bbc76300db9a95
     returns: numpy arrays xs, ys
     """
     n = len(ys)
@@ -2116,6 +3083,10 @@ def NormalProbability(ys, jitter=0):
 
 def Jitter(values, jitter=0.5):
     """Jitters the values by adding a uniform variate in (-jitter, jitter).
+<<<<<<< HEAD
+=======
+
+>>>>>>> 4405ac19a18f9ae8361c609e04bbc76300db9a95
     values: sequence
     jitter: scalar magnitude of jitter
     
@@ -2127,6 +3098,10 @@ def Jitter(values, jitter=0.5):
 
 def NormalProbabilityPlot(sample, fit_color='0.8', **options):
     """Makes a normal probability plot with a fitted line.
+<<<<<<< HEAD
+=======
+
+>>>>>>> 4405ac19a18f9ae8361c609e04bbc76300db9a95
     sample: sequence of numbers
     fit_color: color string for the fitted line
     options: passed along to Plot
@@ -2144,7 +3119,13 @@ def NormalProbabilityPlot(sample, fit_color='0.8', **options):
  
 def Mean(xs):
     """Computes mean.
+<<<<<<< HEAD
     xs: sequence of values
+=======
+
+    xs: sequence of values
+
+>>>>>>> 4405ac19a18f9ae8361c609e04bbc76300db9a95
     returns: float mean
     """
     return np.mean(xs)
@@ -2152,9 +3133,17 @@ def Mean(xs):
 
 def Var(xs, mu=None, ddof=0):
     """Computes variance.
+<<<<<<< HEAD
     xs: sequence of values
     mu: option known mean
     ddof: delta degrees of freedom
+=======
+
+    xs: sequence of values
+    mu: option known mean
+    ddof: delta degrees of freedom
+
+>>>>>>> 4405ac19a18f9ae8361c609e04bbc76300db9a95
     returns: float
     """
     xs = np.asarray(xs)
@@ -2168,9 +3157,17 @@ def Var(xs, mu=None, ddof=0):
 
 def Std(xs, mu=None, ddof=0):
     """Computes standard deviation.
+<<<<<<< HEAD
     xs: sequence of values
     mu: option known mean
     ddof: delta degrees of freedom
+=======
+
+    xs: sequence of values
+    mu: option known mean
+    ddof: delta degrees of freedom
+
+>>>>>>> 4405ac19a18f9ae8361c609e04bbc76300db9a95
     returns: float
     """
     var = Var(xs, mu, ddof)
@@ -2179,8 +3176,15 @@ def Std(xs, mu=None, ddof=0):
 
 def MeanVar(xs, ddof=0):
     """Computes mean and variance.
+<<<<<<< HEAD
     Based on http://stackoverflow.com/questions/19391149/
     numpy-mean-and-variance-from-single-function
+=======
+
+    Based on http://stackoverflow.com/questions/19391149/
+    numpy-mean-and-variance-from-single-function
+
+>>>>>>> 4405ac19a18f9ae8361c609e04bbc76300db9a95
     xs: sequence of values
     ddof: delta degrees of freedom
     
@@ -2194,9 +3198,17 @@ def MeanVar(xs, ddof=0):
 
 def Trim(t, p=0.01):
     """Trims the largest and smallest elements of t.
+<<<<<<< HEAD
     Args:
         t: sequence of numbers
         p: fraction of values to trim off each end
+=======
+
+    Args:
+        t: sequence of numbers
+        p: fraction of values to trim off each end
+
+>>>>>>> 4405ac19a18f9ae8361c609e04bbc76300db9a95
     Returns:
         sequence of values
     """
@@ -2207,9 +3219,17 @@ def Trim(t, p=0.01):
 
 def TrimmedMean(t, p=0.01):
     """Computes the trimmed mean of a sequence of numbers.
+<<<<<<< HEAD
     Args:
         t: sequence of numbers
         p: fraction of values to trim off each end
+=======
+
+    Args:
+        t: sequence of numbers
+        p: fraction of values to trim off each end
+
+>>>>>>> 4405ac19a18f9ae8361c609e04bbc76300db9a95
     Returns:
         float
     """
@@ -2219,10 +3239,20 @@ def TrimmedMean(t, p=0.01):
 
 def TrimmedMeanVar(t, p=0.01):
     """Computes the trimmed mean and variance of a sequence of numbers.
+<<<<<<< HEAD
     Side effect: sorts the list.
     Args:
         t: sequence of numbers
         p: fraction of values to trim off each end
+=======
+
+    Side effect: sorts the list.
+
+    Args:
+        t: sequence of numbers
+        p: fraction of values to trim off each end
+
+>>>>>>> 4405ac19a18f9ae8361c609e04bbc76300db9a95
     Returns:
         float
     """
@@ -2233,8 +3263,15 @@ def TrimmedMeanVar(t, p=0.01):
 
 def CohenEffectSize(group1, group2):
     """Compute Cohen's d.
+<<<<<<< HEAD
     group1: Series or NumPy array
     group2: Series or NumPy array
+=======
+
+    group1: Series or NumPy array
+    group2: Series or NumPy array
+
+>>>>>>> 4405ac19a18f9ae8361c609e04bbc76300db9a95
     returns: float
     """
     diff = group1.mean() - group2.mean()
@@ -2250,11 +3287,19 @@ def CohenEffectSize(group1, group2):
 
 def Cov(xs, ys, meanx=None, meany=None):
     """Computes Cov(X, Y).
+<<<<<<< HEAD
+=======
+
+>>>>>>> 4405ac19a18f9ae8361c609e04bbc76300db9a95
     Args:
         xs: sequence of values
         ys: sequence of values
         meanx: optional float mean of xs
         meany: optional float mean of ys
+<<<<<<< HEAD
+=======
+
+>>>>>>> 4405ac19a18f9ae8361c609e04bbc76300db9a95
     Returns:
         Cov(X, Y)
     """
@@ -2272,9 +3317,17 @@ def Cov(xs, ys, meanx=None, meany=None):
 
 def Corr(xs, ys):
     """Computes Corr(X, Y).
+<<<<<<< HEAD
     Args:
         xs: sequence of values
         ys: sequence of values
+=======
+
+    Args:
+        xs: sequence of values
+        ys: sequence of values
+
+>>>>>>> 4405ac19a18f9ae8361c609e04bbc76300db9a95
     Returns:
         Corr(X, Y)
     """
@@ -2291,8 +3344,15 @@ def Corr(xs, ys):
 
 def SerialCorr(series, lag=1):
     """Computes the serial correlation of a series.
+<<<<<<< HEAD
     series: Series
     lag: integer number of intervals to shift
+=======
+
+    series: Series
+    lag: integer number of intervals to shift
+
+>>>>>>> 4405ac19a18f9ae8361c609e04bbc76300db9a95
     returns: float correlation
     """
     xs = series[lag:]
@@ -2303,9 +3363,17 @@ def SerialCorr(series, lag=1):
 
 def SpearmanCorr(xs, ys):
     """Computes Spearman's rank correlation.
+<<<<<<< HEAD
     Args:
         xs: sequence of values
         ys: sequence of values
+=======
+
+    Args:
+        xs: sequence of values
+        ys: sequence of values
+
+>>>>>>> 4405ac19a18f9ae8361c609e04bbc76300db9a95
     Returns:
         float Spearman's correlation
     """
@@ -2316,6 +3384,10 @@ def SpearmanCorr(xs, ys):
 
 def MapToRanks(t):
     """Returns a list of ranks corresponding to the elements in t.
+<<<<<<< HEAD
+=======
+
+>>>>>>> 4405ac19a18f9ae8361c609e04bbc76300db9a95
     Args:
         t: sequence of numbers
     
@@ -2341,9 +3413,17 @@ def MapToRanks(t):
 
 def LeastSquares(xs, ys):
     """Computes a linear least squares fit for ys as a function of xs.
+<<<<<<< HEAD
     Args:
         xs: sequence of values
         ys: sequence of values
+=======
+
+    Args:
+        xs: sequence of values
+        ys: sequence of values
+
+>>>>>>> 4405ac19a18f9ae8361c609e04bbc76300db9a95
     Returns:
         tuple of (intercept, slope)
     """
@@ -2358,7 +3438,13 @@ def LeastSquares(xs, ys):
 
 def FitLine(xs, inter, slope):
     """Fits a line to the given data.
+<<<<<<< HEAD
     xs: sequence of x
+=======
+
+    xs: sequence of x
+
+>>>>>>> 4405ac19a18f9ae8361c609e04bbc76300db9a95
     returns: tuple of numpy arrays (sorted xs, fit ys)
     """
     fit_xs = np.sort(xs)
@@ -2368,11 +3454,19 @@ def FitLine(xs, inter, slope):
 
 def Residuals(xs, ys, inter, slope):
     """Computes residuals for a linear fit with parameters inter and slope.
+<<<<<<< HEAD
+=======
+
+>>>>>>> 4405ac19a18f9ae8361c609e04bbc76300db9a95
     Args:
         xs: independent variable
         ys: dependent variable
         inter: float intercept
         slope: float slope
+<<<<<<< HEAD
+=======
+
+>>>>>>> 4405ac19a18f9ae8361c609e04bbc76300db9a95
     Returns:
         list of residuals
     """
@@ -2384,6 +3478,10 @@ def Residuals(xs, ys, inter, slope):
 
 def CoefDetermination(ys, res):
     """Computes the coefficient of determination (R^2) for given residuals.
+<<<<<<< HEAD
+=======
+
+>>>>>>> 4405ac19a18f9ae8361c609e04bbc76300db9a95
     Args:
         ys: dependent variable
         res: residuals
@@ -2396,7 +3494,13 @@ def CoefDetermination(ys, res):
 
 def CorrelatedGenerator(rho):
     """Generates standard normal variates with serial correlation.
+<<<<<<< HEAD
     rho: target coefficient of correlation
+=======
+
+    rho: target coefficient of correlation
+
+>>>>>>> 4405ac19a18f9ae8361c609e04bbc76300db9a95
     Returns: iterable
     """
     x = random.gauss(0, 1)
@@ -2410,9 +3514,17 @@ def CorrelatedGenerator(rho):
 
 def CorrelatedNormalGenerator(mu, sigma, rho):
     """Generates normal variates with serial correlation.
+<<<<<<< HEAD
     mu: mean of variate
     sigma: standard deviation of variate
     rho: target coefficient of correlation
+=======
+
+    mu: mean of variate
+    sigma: standard deviation of variate
+    rho: target coefficient of correlation
+
+>>>>>>> 4405ac19a18f9ae8361c609e04bbc76300db9a95
     Returns: iterable
     """
     for x in CorrelatedGenerator(rho):
@@ -2448,7 +3560,13 @@ def Skewness(xs):
 
 def Median(xs):
     """Computes the median (50th percentile) of a sequence.
+<<<<<<< HEAD
     xs: sequence or anything else that can initialize a Cdf
+=======
+
+    xs: sequence or anything else that can initialize a Cdf
+
+>>>>>>> 4405ac19a18f9ae8361c609e04bbc76300db9a95
     returns: float
     """
     cdf = Cdf(xs)
@@ -2457,7 +3575,13 @@ def Median(xs):
 
 def IQR(xs):
     """Computes the interquartile of a sequence.
+<<<<<<< HEAD
     xs: sequence or anything else that can initialize a Cdf
+=======
+
+    xs: sequence or anything else that can initialize a Cdf
+
+>>>>>>> 4405ac19a18f9ae8361c609e04bbc76300db9a95
     returns: pair of floats
     """
     cdf = Cdf(xs)
@@ -2480,8 +3604,15 @@ class FixedWidthVariables(object):
 
     def __init__(self, variables, index_base=0):
         """Initializes.
+<<<<<<< HEAD
         variables: DataFrame
         index_base: are the indices 0 or 1 based?
+=======
+
+        variables: DataFrame
+        index_base: are the indices 0 or 1 based?
+
+>>>>>>> 4405ac19a18f9ae8361c609e04bbc76300db9a95
         Attributes:
         colspecs: list of (start, end) index tuples
         names: list of string variable names
@@ -2497,7 +3628,13 @@ class FixedWidthVariables(object):
 
     def ReadFixedWidth(self, filename, **options):
         """Reads a fixed width ASCII file.
+<<<<<<< HEAD
         filename: string filename
+=======
+
+        filename: string filename
+
+>>>>>>> 4405ac19a18f9ae8361c609e04bbc76300db9a95
         returns: DataFrame
         """
         df = pandas.read_fwf(filename,
@@ -2509,8 +3646,15 @@ class FixedWidthVariables(object):
 
 def ReadStataDct(dct_file, **options):
     """Reads a Stata dictionary file.
+<<<<<<< HEAD
     dct_file: string filename
     options: dict of options passed to open()
+=======
+
+    dct_file: string filename
+    options: dict of options passed to open()
+
+>>>>>>> 4405ac19a18f9ae8361c609e04bbc76300db9a95
     returns: FixedWidthVariables object
     """
     type_map = dict(byte=int, int=int, long=int, float=float, 
@@ -2546,8 +3690,15 @@ def ReadStataDct(dct_file, **options):
 
 def Resample(xs, n=None):
     """Draw a sample from xs with the same length as xs.
+<<<<<<< HEAD
     xs: sequence
     n: sample size (default: len(xs))
+=======
+
+    xs: sequence
+    n: sample size (default: len(xs))
+
+>>>>>>> 4405ac19a18f9ae8361c609e04bbc76300db9a95
     returns: NumPy array
     """
     if n is None:
@@ -2557,9 +3708,17 @@ def Resample(xs, n=None):
 
 def SampleRows(df, nrows, replace=False):
     """Choose a sample of rows from a DataFrame.
+<<<<<<< HEAD
     df: DataFrame
     nrows: number of rows
     replace: whether to sample with replacement
+=======
+
+    df: DataFrame
+    nrows: number of rows
+    replace: whether to sample with replacement
+
+>>>>>>> 4405ac19a18f9ae8361c609e04bbc76300db9a95
     returns: DataDf
     """
     indices = np.random.choice(df.index, nrows, replace=replace)
@@ -2569,7 +3728,13 @@ def SampleRows(df, nrows, replace=False):
 
 def ResampleRows(df):
     """Resamples rows from a DataFrame.
+<<<<<<< HEAD
     df: DataFrame
+=======
+
+    df: DataFrame
+
+>>>>>>> 4405ac19a18f9ae8361c609e04bbc76300db9a95
     returns: DataFrame
     """
     return SampleRows(df, len(df), replace=True)
@@ -2577,8 +3742,15 @@ def ResampleRows(df):
 
 def ResampleRowsWeighted(df, column='finalwgt'):
     """Resamples a DataFrame using probabilities proportional to given column.
+<<<<<<< HEAD
     df: DataFrame
     column: string column name to use as weights
+=======
+
+    df: DataFrame
+    column: string column name to use as weights
+
+>>>>>>> 4405ac19a18f9ae8361c609e04bbc76300db9a95
     returns: DataFrame
     """
     weights = df[column].copy()
@@ -2590,7 +3762,13 @@ def ResampleRowsWeighted(df, column='finalwgt'):
 
 def PercentileRow(array, p):
     """Selects the row from a sorted array that maps to percentile p.
+<<<<<<< HEAD
     p: float 0--100
+=======
+
+    p: float 0--100
+
+>>>>>>> 4405ac19a18f9ae8361c609e04bbc76300db9a95
     returns: NumPy array (one row)
     """
     rows, cols = array.shape
@@ -2600,11 +3778,22 @@ def PercentileRow(array, p):
 
 def PercentileRows(ys_seq, percents):
     """Given a collection of lines, selects percentiles along vertical axis.
+<<<<<<< HEAD
     For example, if ys_seq contains simulation results like ys as a
     function of time, and percents contains (5, 95), the result would
     be a 90% CI for each vertical slice of the simulation results.
     ys_seq: sequence of lines (y values)
     percents: list of percentiles (0-100) to select
+=======
+
+    For example, if ys_seq contains simulation results like ys as a
+    function of time, and percents contains (5, 95), the result would
+    be a 90% CI for each vertical slice of the simulation results.
+
+    ys_seq: sequence of lines (y values)
+    percents: list of percentiles (0-100) to select
+
+>>>>>>> 4405ac19a18f9ae8361c609e04bbc76300db9a95
     returns: list of NumPy arrays, one for each percentile
     """
     nrows = len(ys_seq)
@@ -2622,6 +3811,10 @@ def PercentileRows(ys_seq, percents):
 
 def Smooth(xs, sigma=2, **options):
     """Smooths a NumPy array with a Gaussian filter.
+<<<<<<< HEAD
+=======
+
+>>>>>>> 4405ac19a18f9ae8361c609e04bbc76300db9a95
     xs: sequence
     sigma: standard deviation of the filter
     """
@@ -2633,6 +3826,10 @@ class HypothesisTest(object):
 
     def __init__(self, data):
         """Initializes.
+<<<<<<< HEAD
+=======
+
+>>>>>>> 4405ac19a18f9ae8361c609e04bbc76300db9a95
         data: data in whatever form is relevant
         """
         self.data = data
@@ -2643,7 +3840,13 @@ class HypothesisTest(object):
 
     def PValue(self, iters=1000):
         """Computes the distribution of the test statistic and p-value.
+<<<<<<< HEAD
         iters: number of iterations
+=======
+
+        iters: number of iterations
+
+>>>>>>> 4405ac19a18f9ae8361c609e04bbc76300db9a95
         returns: float p-value
         """
         self.test_stats = [self.TestStatistic(self.RunModel()) 
@@ -2670,6 +3873,10 @@ class HypothesisTest(object):
 
     def TestStatistic(self, data):
         """Computes the test statistic.
+<<<<<<< HEAD
+=======
+
+>>>>>>> 4405ac19a18f9ae8361c609e04bbc76300db9a95
         data: data in whatever form is relevant        
         """
         raise UnimplementedMethodException()
@@ -2681,6 +3888,10 @@ class HypothesisTest(object):
 
     def RunModel(self):
         """Run the model of the null hypothesis.
+<<<<<<< HEAD
+=======
+
+>>>>>>> 4405ac19a18f9ae8361c609e04bbc76300db9a95
         returns: simulated data
         """
         raise UnimplementedMethodException()
