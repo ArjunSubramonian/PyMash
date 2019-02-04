@@ -2,6 +2,7 @@
 .gitignore
 __pycache__/
 permutations/
+examples/
 pragathi/
 tanaisha/
 .gitignore
