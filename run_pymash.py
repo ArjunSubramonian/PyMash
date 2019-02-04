@@ -22,6 +22,11 @@ harmonics = [1,1/2,1/3,1/4]
 precision = 0.01
 test_folder_path = ""
 
+to_wav = False
+norm = False
+convert_PCM_16 = False
+qual = False
+
 def assess_quality(path_to_wav_file):
     f = thinkdsp.read_wave(path_to_wav_file)
     # makes niceness based on the amplitude of the peaks
@@ -90,9 +95,8 @@ def find_best_overlay(path_song1, song1_data, path_song2, song2_data, name_song1
     stretch(song2_data, path_song2, tempo2, tempo1)
     tempo2, beats2 = get_tempo_and_beats(librosa.load(path_song2))
 
-    ### Only modifying the second song with later occurrence of first beat
-    # !!!
-    # results = []
+    ### Only modifying the song with later occurrence of first beat
+    results = []
     if beats1[0] < beats2[0]: 
         for t in range(0, 3):
             # Case t + 1: when the first beat of the first song aligns with the (t + 1)th beat of the second song
@@ -103,9 +107,9 @@ def find_best_overlay(path_song1, song1_data, path_song2, song2_data, name_song1
             output_path = test_folder_path + '/' + name_song1 + '_' + name_song2 + '_' + str(t) + '.wav'
             add(path_song1, path_song2, start2, output_path)
 
-            # !!!
-            # quality = assess_quality(output_path)
-            # results.append((output_path, quality))
+            if qual:
+                quality = assess_quality(output_path)
+                results.append((output_path, quality))
     else:
         for t in range(0, 3):
             # Case t + 1: when the first beat of the first song aligns with the (t + 1)th beat of the second song
@@ -116,12 +120,12 @@ def find_best_overlay(path_song1, song1_data, path_song2, song2_data, name_song1
             output_path = test_folder_path + '/' + name_song2 + '_' + name_song1 + '_' + str(t) + '.wav'
             add(path_song2, path_song1, start1, output_path)
 
-            # !!!
-            # quality = assess_quality(output_path)
-            # results.append((output_path, quality))
-
-    # !!!
-    # return results
+            if qual:
+                quality = assess_quality(output_path)
+                results.append((output_path, quality))
+    
+    if qual:
+        return results
 
 if __name__ == "__main__":
     
@@ -139,6 +143,8 @@ if __name__ == "__main__":
             norm = True
         if "PCM16" in options:
             convert_PCM_16 = True
+        if "QUAL" in options:
+            qual = True
     except:
         pass
 
@@ -170,8 +176,7 @@ if __name__ == "__main__":
             y, sr = librosa.load(test_folder_path + "/normalized/" + file)
             playlist.append((file, (y, sr)))
 
-    # !!!
-    # permutations = {}
+    permutations = {}
     for a in range(0, len(playlist) - 1):
         i = playlist[a]
         for b in range(a + 1, len(playlist)):
@@ -179,24 +184,25 @@ if __name__ == "__main__":
 
             print('Currently PyMashing: ' + i[0] + ' and ' + j[0])
 
-            find_best_overlay(test_folder_path + "/normalized/" + i[0], i[1], test_folder_path + "/normalized/" + j[0], j[1], i[0], j[0])
-            # !!!
-            # results = find_best_overlay(test_folder_path + "/normalized/" + i[0], i[1], test_folder_path + "/normalized/" + j[0], j[1], i[0], j[0])
-            # for result in results:
-                # permutations[result[0]] = result[1]
+            if qual:
+                results = find_best_overlay(test_folder_path + "/normalized/" + i[0], i[1], test_folder_path + "/normalized/" + j[0], j[1], i[0], j[0])
+                for result in results:
+                    permutations[result[0]] = result[1]
+            else:
+                find_best_overlay(test_folder_path + "/normalized/" + i[0], i[1], test_folder_path + "/normalized/" + j[0], j[1], i[0], j[0])
       
-    # !!!
-    # # write out qualities of mashups generated          
-    # with open(test_folder_path + '/qualities.txt', 'w') as f:
-    #     f.write('')
-    # with open(test_folder_path + '/qualities.txt', 'a') as f:
-    #     max_mashup = ""
-    #     max_quality = -1
-    #     for file in permutations:
-    #         f.write(file + ': ' + str(permutations[file]) + '\n')
-    #         if permutations[file] > max_quality:
-    #             max_mashup = file;
-    #             max_quality = permutations[file]
+    # write out qualities of mashups generated
+    if qual:          
+        with open(test_folder_path + '/qualities.txt', 'w') as f:
+            f.write('')
+        with open(test_folder_path + '/qualities.txt', 'a') as f:
+            max_mashup = ""
+            max_quality = -1
+            for file in permutations:
+                f.write(file + ': ' + str(permutations[file]) + '\n')
+                if permutations[file] > max_quality:
+                    max_mashup = file;
+                    max_quality = permutations[file]
 
-    # print("Best mashup:", max_mashup, "(" + max_quality + ")")
+        print("Best mashup:", max_mashup, "(" + max_quality + ")")
 
